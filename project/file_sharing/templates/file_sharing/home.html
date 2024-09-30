@@ -1,0 +1,28 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Добро Пожаловать!</h1>
+        {% if user.is_authenticated %}
+            <h2>{{user.username}} успешно вошел! </h2>
+            <p><a href="{% url 'profile' %}">Профиль</a></p>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Выход</button>
+              </form> 
+        {% else %}
+            <p><a href="{% url 'login' %}">Вход</a></p>
+            <p><a href="{% url 'register' %}">Регистрация</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

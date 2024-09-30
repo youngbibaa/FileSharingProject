@@ -1,0 +1,134 @@
+/* Основные стили для body */
+body {
+    font-family: 'Roboto', sans-serif; /* Устанавливаем шрифт */
+    background-color: #f4f4f4; /* Цвет фона */
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    color: #333; /* Цвет текста */
+    display: flex; /* Используем Flexbox для центрирования */
+    flex-direction: column; /* Вертикальное расположение */
+    align-items: center; /* Центрирование по горизонтали */
+    min-height: 100vh; /* Высота на весь экран */
+}
+
+/* Заголовок */
+h1 {
+    font-size: 2.5em; /* Размер шрифта заголовка */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #007bff; /* Цвет заголовка */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Тень для заголовка */
+}
+
+/* Подзаголовок */
+h2 {
+    font-size: 1.5em; /* Размер шрифта подзаголовка */
+    margin: 20px 0; /* Отступы сверху и снизу */
+    color: #555; /* Цвет подзаголовка */
+}
+
+/* Основной контейнер */
+.container {
+    background: white; /* Цвет фона контейнера */
+    border-radius: 15px; /* Закругление углов */
+    padding: 20px; /* Внутренние отступы */
+    max-width: 800px; /* Максимальная ширина */
+    width: 90%; /* Ширина контейнера */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Тень */
+    margin: 20px; /* Отступы */
+    text-align: center; /* Центрирование текста */
+}
+
+/* Стили для параграфов */
+p {
+    font-size: 1.1em; /* Размер шрифта для параграфов */
+    margin: 5px 0; /* Отступы */
+}
+
+/* Стили для форм */
+form {
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+label {
+    font-size: 1.1em; /* Размер шрифта для меток */
+    margin-right: 10px; /* Отступ справа */
+    color: #555; /* Цвет меток */
+}
+
+/* Поле ввода */
+input[type="text"], select {
+    padding: 10px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругление углов */
+    border: 1px solid #ddd; /* Рамка */
+    margin-right: 10px; /* Отступ справа */
+}
+
+/* Кнопки */
+button {
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    padding: 10px 15px; /* Внутренние отступы */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Закругление углов */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+button:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}
+
+/* Стили для списка файлов */
+ul {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 25%;
+
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренние отступы */
+    display: grid; /* Включаем CSS Grid */
+    /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); Адаптивная сетка */
+    gap: 20px; /* Расстояние между элементами */
+}
+
+li {
+    background: rgba(0, 123, 255, 0.1); /* Полупрозрачный фон */
+    border-radius: 10px; /* Закругление углов */
+    padding: 15px; /* Внутренние отступы */
+    transition: transform 0.3s; /* Плавный переход для эффекта */
+    text-align: center; /* Центрирование текста внутри элемента */
+}
+
+li:hover {
+    transform: scale(1.02); /* Увеличение при наведении */
+}
+
+li:hover {
+    transform: scale(1.02); /* Увеличение при наведении */
+}
+
+/* Стили для ссылок */
+a {
+    color: #007bff; /* Цвет ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s; /* Плавный переход цвета */
+}
+
+a:hover {
+    color: #0056b3; /* Темнее при наведении */
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Стили для дополнительных ссылок */
+b a {
+    font-weight: bold; /* Жирный шрифт */
+    display: inline-block; /* Блочный элемент */
+    margin-top: 20px; /* Отступ сверху */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругление углов */
+    background-color: #007bff; /* Цвет фона */
+    color: white; /* Цвет текста */
+}
+
+b a:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}

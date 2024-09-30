@@ -1,0 +1,58 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/profile.css' %}">
+</head>
+<body>
+    <h1>Профиль: {{ user.username }}</h1>
+    <p>Email: {{ user.email }}</p>
+    <p>Дата регистрации: {{ user.registration_date }}</p>
+
+    <h2>Загруженные файлы:</h2>
+    <div>
+        <form method="get">
+            <label for="search">Поиск по заголовку:</label>
+            <input type="text" name="search" id="search" placeholder="Введите название файла" value="{{ request.GET.search }}">
+            <button type="submit">Поиск</button>
+        </form>
+
+        <form method="get">
+            <label for="ordering">Сортировать по:</label>
+            <select name="ordering" id="ordering">
+                <option value="-uploaded_at">По дате (от новых)</option>
+                <option value="uploaded_at">По дате (от старых)</option>
+                <option value="downloads">По количеству скачиваний (от меньшего)</option>
+                <option value="-downloads">По количеству скачиваний (от большего)</option>
+                <option value="category">По категории (A-Z)</option>
+                <option value="-category">По категории (Z-A)</option>
+            </select>
+            <button type="submit">Сортировать</button>
+        </form>
+    </div>
+
+    {% if files %}
+        <ul>
+            {% for file in files %}
+                <li>
+                    <a href="{% url 'file_detail' file.pk %}">{{ file.title }}</a>
+                    <p>{{ file.title }}</p>
+                    <p>{{ file.category }}</p>
+                    <p>{{ file.downloads }}</p>
+                    <p>{{ file.author.username }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Пользователь пока не загружал файлы.</p>
+    {% endif %}
+
+    <b><a href="{% url 'create_file' %}">Загрузить файл</a></b>  
+    <a href="{% url 'download_history' %}">История скачиваний</a>
+</body>
+</html>
+{% endblock %}

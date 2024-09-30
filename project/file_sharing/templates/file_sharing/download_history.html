@@ -1,0 +1,21 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>История скачиваний</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/download.css' %}">
+</head>
+<body>
+    <h2>История скачиваний</h2>
+    <ul>
+        {% for download in download_history %}
+            <li>{{ download.file_name }} - {{ download.timestamp }}</li>
+        {% empty %}
+            <li>Нет записей о скачиваниях.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{file.title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/file_detail.css' %}">
+</head>
+<body>
+    <h1>{{ file.title }}</h1>
+    <p><strong>Описание:</strong> {{ file.description }}</p>
+    <p><strong>Загружено:</strong> {{ file.uploaded_at }}</p>
+    <p><strong>Автор:</strong> {{ file.author.username }}</p>
+    <p><strong>Количество скачиваний:</strong> {{ file.downloads }}</p>
+    <p><strong>Категория:</strong> {{ file.category }}</p>
+    
+    <a href="{% url 'download_file' file.pk %}">Скачать файл</a>
+
+    <h2>Комментарии:</h2>
+    {% if form %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Оставить отзыв</button>
+        </form>
+    {% else %}
+        <p>Форма не найдена!</p>
+    {% endif %}
+
+    <h3>Существующие комментарии:</h3>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <p>Оценка: {{ comment.rating }} </p>
+                <p>Комментарий: {{ comment.text }} </p>
+                <p>Автор: {{ comment.author }} </p>
+        {% endfor %}
+    </ul>
+
+    <p>Вернуться в <a href="{% url 'profile' %}">профиль</a>.</p>
+</body>
+</html>
+{% endblock %}

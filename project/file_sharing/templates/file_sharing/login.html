@@ -1,0 +1,29 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход на сайт</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Вход на сайт</h2>
+    
+        {% if form.errors %}
+        <p style="color: red;">Ошибка входа. Пожалуйста, проверьте имя пользователя и пароль.</p>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <button type="submit">Войти</button>
+        </form>
+
+        <p>Еще не зарегистрированы? <a href="{% url 'register' %}">Зарегистрируйтесь здесь</a>.</p>
+    </div>
+</body>
+</html>
+{% endblock %}

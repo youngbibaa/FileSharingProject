@@ -1,0 +1,23 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка файла</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Загрузка файла</h2>
+    
+        <form method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button type="submit">Загрузить</button>
+        </form>
+
+    </div>
+</body>
+</html>
+{% endblock %}

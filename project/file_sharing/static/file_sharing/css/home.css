@@ -1,0 +1,57 @@
+/* Основные стили для body */
+body {
+    font-family: Arial, sans-serif; /* Устанавливаем шрифт */
+    background-color: #f4f4f4; /* Цвет фона */
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    display: flex; /* Используем Flexbox для центрирования */
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+    height: 100vh; /* Высота на весь экран */
+}
+
+/* Контейнер */
+.container {
+    max-width: 800px; /* Максимальная ширина */
+    padding: 20px; /* Внутренние отступы */
+    background-color: white; /* Цвет фона контейнера */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+    border-radius: 8px; /* Закругление углов */
+    text-align: center; /* Центрирование текста внутри контейнера */
+}
+
+/* Заголовки */
+h1 {
+    color: #333; /* Цвет текста */
+}
+
+h2 {
+    color: #007bff; /* Цвет текста */
+}
+
+/* Ссылки */
+a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #007bff; /* Цвет ссылок */
+}
+
+a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+}
+
+/* Кнопки */
+button {
+    display: block; /* Блочный элемент */
+    width: 100%; /* Ширина кнопки */
+    padding: 10px; /* Внутренние отступы */
+    margin-top: 20px; /* Отступ сверху */
+    border: none; /* Убираем рамку */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    border-radius: 5px; /* Закругление углов */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+button:hover {
+    background-color: #0056b3; /* Темнее при наведении */
+}

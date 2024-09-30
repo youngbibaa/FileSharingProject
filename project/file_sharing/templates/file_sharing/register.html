@@ -1,0 +1,25 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Регистрация нового пользователя</h2>
+    
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        
+        <p>Уже зарегистрированы? <a href="{% url 'login' %}">Войдите здесь</a>.</p>
+    </div>
+</body>
+</html>
+{% endblock %}
