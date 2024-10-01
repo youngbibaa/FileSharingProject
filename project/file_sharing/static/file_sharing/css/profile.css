@@ -110,7 +110,7 @@ li:hover {
 a {
     color: #007bff; /* Цвет ссылок */
     text-decoration: none; /* Убираем подчеркивание */
-    transition: color 0.3s; /* Плавный переход цвета */
+    transition: color 1.5s; /* Плавный переход цвета */
 }
 
 a:hover {

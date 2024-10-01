@@ -5,41 +5,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{file.title}}</title>
+    <title>{{ file.title }}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'file_sharing/css/file_detail.css' %}">
 </head>
 <body>
-    <h1>{{ file.title }}</h1>
-    <p><strong>Описание:</strong> {{ file.description }}</p>
-    <p><strong>Загружено:</strong> {{ file.uploaded_at }}</p>
-    <p><strong>Автор:</strong> {{ file.author.username }}</p>
-    <p><strong>Количество скачиваний:</strong> {{ file.downloads }}</p>
-    <p><strong>Категория:</strong> {{ file.category }}</p>
-    
-    <a href="{% url 'download_file' file.pk %}">Скачать файл</a>
+    <div class="content">
+        <h1>{{ file.title }}</h1>
+        <p><strong>Описание:</strong> {{ file.description }}</p>
+        <p><strong>Загружено:</strong> {{ file.uploaded_at }}</p>
+        <p><strong>Автор:</strong> {{ file.author.username }}</p>
+        <p><strong>Количество скачиваний:</strong> {{ file.downloads }}</p>
+        <p><strong>Категория:</strong> {{ file.category }}</p>
+        
+        <div class="link-container">
+            <a href="{% url 'download_file' file.pk %}">Скачать файл</a>
+            <a href="{% url 'file_delete' file.pk %}">Удалить файл</a>
+        </div>
 
-    <h2>Комментарии:</h2>
-    {% if form %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Оставить отзыв</button>
-        </form>
-    {% else %}
-        <p>Форма не найдена!</p>
-    {% endif %}
+        {% if form %}
+            <h2>Оставить отзыв:</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="rating">Оценка:</label>
+                {{ form.rating }} <!-- Предполагаем, что у вас есть поле для рейтинга -->
 
-    <h3>Существующие комментарии:</h3>
-    <ul>
-        {% for comment in comments %}
-            <li>
-                <p>Оценка: {{ comment.rating }} </p>
-                <p>Комментарий: {{ comment.text }} </p>
-                <p>Автор: {{ comment.author }} </p>
-        {% endfor %}
-    </ul>
+                <label for="comment">Комментарий:</label>
+                {{ form.text }} <!-- Поле для комментария -->
+                
+                <button type="submit">Оставить отзыв</button>
+            </form>
+        {% else %}
+            <p>Форма не найдена!</p>
+        {% endif %}
 
-    <p>Вернуться в <a href="{% url 'profile' %}">профиль</a>.</p>
+        <h3>Существующие комментарии:</h3>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <p>Оценка: {{ comment.rating }}</p>
+                    <p>Комментарий: {{ comment.text }}</p>
+                    <p>Автор: {{ comment.author }}</p>
+                </li>
+            {% empty %}
+                <li>Комментариев нет.</li>
+            {% endfor %}
+        </ul>
+        <p>Вернуться в <a href="{% url 'profile' %}">профиль</a>.</p>
+    </div>
 </body>
 </html>
 {% endblock %}

@@ -1,102 +1,188 @@
-/* Основные стили для body */
+/* Общие стили */
 body {
-    font-family: 'Roboto', sans-serif; /* Устанавливаем шрифт */
-    background-color: #f4f4f4; /* Цвет фона */
-    margin: 0; /* Убираем отступы */
-    padding: 0; /* Убираем внутренние отступы */
-    color: #333; /* Цвет текста */
-    display: flex; /* Используем Flexbox для центрирования */
-    flex-direction: column; /* Вертикальное расположение */
-    align-items: center; /* Центрирование по горизонтали */
-    min-height: 100vh; /* Высота на весь экран */
+    font-family: 'OpenSans-Regular', sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
 }
 
-/* Заголовок файла */
+.content {
+    max-width: 800px; /* Максимальная ширина контента */
+    margin: auto; /* Центрируем контент */
+    background: #ffffff;
+    padding: 30px; /* Увеличен отступ */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовки */
 h1 {
-    font-size: 2em; /* Уменьшаем размер шрифта заголовка */
-    margin-bottom: 20px; /* Отступ снизу */
-    color: #007bff; /* Цвет заголовка */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Тень для заголовка */
+    font-size: 24px;
+    color: #4272d7;
+    margin-bottom: 20px; /* Увеличен отступ снизу */
+    text-align: center; /* Центрирование заголовка */
 }
 
-/* Подзаголовок */
 h2 {
-    font-size: 1.8em; /* Размер шрифта подзаголовка */
-    margin: 20px 0; /* Отступы сверху и снизу */
-    color: #555; /* Цвет подзаголовка */
+    font-size: 20px;
+    color: #555;
+    margin-top: 30px;
+    border-bottom: 2px solid #e6e6e6; /* Подчеркивание */
+    padding-bottom: 10px; /* Отступ снизу */
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+    color: #444;
+    margin-top: 20px;
+    text-align: center;
 }
 
 /* Стили для параграфов */
 p {
-    font-size: 1.1em; /* Размер шрифта для параграфов */
-    margin: 10px 0; /* Отступы */
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0; /* Добавлен отступ */
+    text-align: center;
 }
 
-/* Стили для ссылок */
-a {
-    color: #007bff; /* Цвет ссылок */
-    text-decoration: none; /* Убираем подчеркивание */
-    transition: color 0.3s; /* Плавный переход цвета */
-    margin-top: 15px; /* Отступ сверху */
-    display: inline-block; /* Блочный элемент */
+/* Ссылки */
+.link-container {
+    display: flex; /* Используем flex для выравнивания элементов */
+    justify-content: center; /* Центрируем ссылки */
+    margin-top: 20px; /* Отступ сверху */
 }
 
-a:hover {
-    color: #0056b3; /* Темнее при наведении */
-    text-decoration: underline; /* Подчеркивание при наведении */
+.link-container a {
+    color: #4272d7;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px; /* Отступ между ссылками */
+    transition: color 0.3s;
 }
 
-/* Стили для формы комментариев */
+.link-container a:hover {
+    text-decoration: underline;
+    color: #333333;
+}
+
+/* Формы */
 form {
-    margin: 20px 0; /* Отступы сверху и снизу */
-    padding: 20px; /* Внутренние отступы */
-    background: white; /* Цвет фона формы */
-    border-radius: 10px; /* Закругление углов */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
-    width: 100%; /* Ширина формы */
-    max-width: 600px; /* Максимальная ширина формы */
+    margin-top: 20px;
+    display: flex; /* Используем flex для выравнивания элементов */
+    flex-direction: column; /* Элементы располагаются в колонку */
 }
 
-/* Кнопки */
 button {
-    background-color: #007bff; /* Цвет фона кнопки */
-    color: white; /* Цвет текста */
-    padding: 10px 15px; /* Внутренние отступы */
-    border: none; /* Убираем рамку */
-    border-radius: 5px; /* Закругление углов */
-    cursor: pointer; /* Указатель при наведении */
-    transition: background-color 0.3s; /* Плавный переход цвета фона */
+    padding: 10px 15px;
+    background-color: #4272d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Отступ между кнопкой и формой */
 }
 
 button:hover {
-    background-color: #0056b3; /* Темнее при наведении */
+    background-color: #333333;
 }
 
 /* Стили для списка комментариев */
 ul {
-    list-style: none; /* Убираем маркеры списка */
-    padding: 0; /* Убираем внутренние отступы */
+    list-style-type: none;
+    padding: 0;
     margin-top: 20px; /* Отступ сверху */
-    display: grid; /* Используем сетку для комментариев */
-    grid-template-columns: 1fr; /* Одна колонка */
-    gap: 15px; /* Промежуток между элементами */
 }
 
-/* Стили для отдельных комментариев */
 li {
-    background: rgba(0, 123, 255, 0.1); /* Полупрозрачный фон */
-    border-radius: 10px; /* Закругление углов */
-    padding: 15px; /* Внутренние отступы */
-    transition: transform 0.3s; /* Плавный переход для эффекта */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: box-shadow 0.3s;
+    text-align: center;
 }
 
 li:hover {
-    transform: scale(1.02); /* Увеличение при наведении */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Стиль для оценки комментария */
-h3 {
-    margin-top: 30px; /* Отступ сверху */
-    font-size: 1.5em; /* Размер шрифта */
-    color: #555; /* Цвет заголовка комментариев */
+/* Стили для сообщения об отсутствии комментариев */
+li.empty {
+    text-align: center;
+    color: #777;
+}
+
+/* Адаптивные стили */
+@media (max-width: 600px) {
+    .content {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+}
+/* Формы */
+form {
+    margin-top: 20px;
+    display: flex; /* Используем flex для выравнивания элементов */
+    flex-direction: column; /* Элементы располагаются в колонку */
+    max-width: 500px; /* Ограничим ширину формы */
+    margin-left: auto; /* Центрируем форму */
+    margin-right: auto; /* Центрируем форму */
+}
+
+form label {
+    font-weight: bold; /* Жирный шрифт для меток */
+    margin-bottom: 5px; /* Отступ снизу */
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    padding: 10px; /* Отступ внутри поля */
+    border: 1px solid #ddd; /* Граница */
+    border-radius: 5px; /* Закругленные углы */
+    margin-bottom: 15px; /* Отступ снизу */
+    font-size: 16px; /* Размер шрифта */
+    width: 100%; /* Полная ширина */
+    box-sizing: border-box; /* Включаем отступы в ширину */
+    transition: border-color 0.3s; /* Плавный переход для границы */
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form textarea:focus {
+    border-color: #4272d7; /* Цвет границы при фокусе */
+    outline: none; /* Убираем стандартное обрамление */
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4272d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #333333;
 }

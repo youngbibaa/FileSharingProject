@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomePageView, RegisterView, UserChangeView, ProfileView, CreateFileView, FileDetailView, download_file, view_download_history
+from .views import HomePageView, RegisterView, UserChangeView, ProfileView, CreateFileView, FileDetailView, download_file, view_download_history, file_delete
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -10,7 +10,8 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('change_user/', UserChangeView.as_view(), name='change_user'),
     path('create_file/', CreateFileView.as_view(), name='create_file'),
-    path('file_detail/<int:pk>', FileDetailView.as_view(), name='file_detail'),
+    path('file_detail/<int:pk>/', FileDetailView.as_view(), name='file_detail'),
     path('download/<int:pk>/', download_file, name='download_file'),
-    path('download_history/', view_download_history, name="download_history")
+    path('download_history/', view_download_history, name="download_history"),
+    path('file_delete/<int:pk>/', file_delete, name='file_delete'),
 ]

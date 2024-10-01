@@ -1,12 +1,16 @@
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, View, UpdateView, FormView
 from .models import CustomUser, Comment, Review, File
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CommentChangeForm, CommentCreationForm, ReviewChangeForm, ReviewCreationForm, FileChangeForm, FileCreationForm, CustomUserCreationForm, CustomUserChangeForm
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.http import HttpResponseRedirect
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+from django.http import StreamingHttpResponse
 
 class HomePageView(View):
     def get(self, request, *args, **kwargs):
@@ -52,7 +56,7 @@ class ProfileView(LoginRequiredMixin, ListView):
         return queryset.order_by(ordering)
 
 
-class CreateFileView(CreateView):
+class CreateFileView(LoginRequiredMixin, CreateView):
     model = File
     form_class = FileCreationForm
     template_name = 'file_sharing/create_file.html'
@@ -62,7 +66,7 @@ class CreateFileView(CreateView):
         form.instance.author = CustomUser.objects.get(id=self.request.user.id) 
         return super().form_valid(form)
 
-class FileDetailView(DetailView, FormView):
+class FileDetailView(LoginRequiredMixin, DetailView, FormView):
     model = File
     form_class = ReviewCreationForm
     template_name = 'file_sharing/file_detail.html'
@@ -86,17 +90,34 @@ class FileDetailView(DetailView, FormView):
 
 
 @login_required
+def file_delete(request, pk):
+    file = get_object_or_404(File, pk=pk)  
+    file.delete()
+    return redirect("profile") 
+
+
+@login_required
 def download_file(request, pk):
+    # Получаем файл по первичному ключу
     file = get_object_or_404(File, pk=pk)
 
-    # Увеличиваем количество скачиваний
+    # Увеличиваем счетчик загрузок
     file.downloads += 1
-    file.save(update_fields=['downloads'])  # Сохраняем изменение только этого поля
+    file.save(update_fields=['downloads'])
 
-    response = HttpResponse(file.file, content_type='application/octet-stream')
+    # Создаем генератор для потоковой передачи файла
+    def file_iterator(file_obj, chunk_size=8192):
+        while True:
+            chunk = file_obj.read(chunk_size)
+            if not chunk:
+                break
+            yield chunk
+
+    # Настраиваем StreamingHttpResponse для отправки файла
+    response = StreamingHttpResponse(file_iterator(file.file), content_type='application/octet-stream')
     response['Content-Disposition'] = f'attachment; filename="{file.title}"'
 
-    # Сохраняем информацию о скачивании в сессии
+    # Обновление истории загрузок в сессии пользователя
     if request.user.is_authenticated:
         if 'download_history' not in request.session:
             request.session['download_history'] = []
@@ -106,13 +127,15 @@ def download_file(request, pk):
             'timestamp': timezone.now().strftime("%d.%m.%Y %H:%M")
         }
         request.session['download_history'].append(download_info)
-        request.session.modified = True  # Указываем, что сессия была изменена
+        request.session.modified = True  
 
     return response
 @login_required
 def view_download_history(request):
     download_history = request.session.get('download_history', [])
     return render(request, 'file_sharing/download_history.html', {'download_history': download_history})
+
+
 
 
     

@@ -13,7 +13,7 @@
     <p>Email: {{ user.email }}</p>
     <p>Дата регистрации: {{ user.registration_date }}</p>
 
-    <h2>Загруженные файлы:</h2>
+   
     <div>
         <form method="get">
             <label for="search">Поиск по заголовку:</label>
@@ -34,16 +34,15 @@
             <button type="submit">Сортировать</button>
         </form>
     </div>
-
+    <h2>Загруженные файлы:</h2>
     {% if files %}
         <ul>
             {% for file in files %}
                 <li>
                     <a href="{% url 'file_detail' file.pk %}">{{ file.title }}</a>
-                    <p>{{ file.title }}</p>
-                    <p>{{ file.category }}</p>
-                    <p>{{ file.downloads }}</p>
-                    <p>{{ file.author.username }}</p>
+                    <p>Категория:{{ file.category }}</p>
+                    <p>Кол-во скачиваний:{{ file.downloads }}</p>
+                    <p>Автор:{{ file.author.username }}</p>
                 </li>
             {% endfor %}
         </ul>
@@ -52,7 +51,7 @@
     {% endif %}
 
     <b><a href="{% url 'create_file' %}">Загрузить файл</a></b>  
-    <a href="{% url 'download_history' %}">История скачиваний</a>
+    <b><a href="{% url 'download_history' %}">История скачиваний</a></b>  
 </body>
 </html>
 {% endblock %}
